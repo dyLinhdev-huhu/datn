@@ -1,0 +1,10 @@
+{
+    "dustData": {
+      "dbConfig": {
+        "host": "localhost",
+        "port": 5984,
+        "dbName": "mongodb+srv://dyLinh-dev:Linhech153@cluster-dustsensor.4u4y03l.mongodb.net/?retryWrites=true&w=majority",
+        "topic" : "datn/dyLinh_dev/dustSensor/data"
+      }
+    }
+  }
