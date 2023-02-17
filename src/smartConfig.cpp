@@ -1,16 +1,19 @@
 #include "smartConfig.h"
 #include "log.h"
+#include "nodeId.h"
 
 ESP8266WebServer esp8Server(80);
 
 int i = 0;
 int statusCode;
-const char* ssid_AP = "ota-esp8266";
+String ssid_AP = "esp8266-dust";
 const char* password_AP = "dyLinhdev";
-String st;	
+String st;
 String content;
 String _user_SSID = "";
 String _user_PASSWORD = "";
+
+#define NODE_NUM	NODE_1
 
 void smartConfig_Init()
 {
@@ -27,8 +30,8 @@ void smartConfig_Init()
 	{
 		logi("Wifi connected");
 		logi("IP Address: %d", WiFi.localIP());
-		esp8Server.send(200,"text/plain","Hello World"); 
-		esp8Server.begin();
+		// esp8Server.send(200,"text/plain","Hello World"); 
+		// esp8Server.begin();
 		return;
 	}
 	else
@@ -97,7 +100,8 @@ void setupAP(void)
 	}
 	st += "</ol>";
 	delay(100);
-	WiFi.softAP(ssid_AP, password_AP);
+	ssid_AP += NODE_NUM;
+	WiFi.softAP(ssid_AP.c_str(), password_AP);
 	launchWeb();
 
 }

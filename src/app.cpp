@@ -6,21 +6,38 @@
 #include <String>
 #include "nodeId.h"
 // using namespace std;
-#define TOPIC "datn/dyLinh_dev/dustSensor/data"
-#define NODE_SENSOR NODE_1
-#define enaTopic "datn/dyLinh_dev/dustSensor/enable"
-#define hsoTopic "datn/dyLinh_dev/dustSensor/heso"
-#define stimeTopic "datn/dyLinh_dev/dustSensor/stime"
 
+//**************  TOPIC    ******************
+#define dataTopic       "datn/dyLinh_dev/dustSensor/data"
+#define enaTopic        "datn/dyLinh_dev/dustSensor/enable"
+#define hsonTopic        "datn/dyLinh_dev/dustSensor/hesonhan"
+#define hsocTopic        "datn/dyLinh_dev/dustSensor/hesocong"
+#define stimeTopic      "datn/dyLinh_dev/dustSensor/stime"
+
+//**************  TOPIC    ******************
+
+//**************  ID NODE    ******************
+#define ID_NODE     ID_1
+
+//**************  ID NODE    ******************
+
+ 
 WiFiClient espClient;
 PubSubClient mqtt(espClient);
 extern ESP8266WebServer esp8Server;
 static const char* mqtt_server = "broker.hivemq.com";
 int startFlag = 0;
 unsigned long logTime;
-#define HS  0.002264
-float heso = HS;
+
+#define HSN  0.002264
+#define HSC  18
+
+//**************  VARIABLE    ******************
+float hesonhan = HSN;
+int hesocong = HSC;
 unsigned long sampletime_ms = 10000;
+
+//**************  VARIABLE    ******************
 
 void onDataMqtt(char* topic, byte* payload, unsigned int length);
 
@@ -41,15 +58,22 @@ void app::initHardware()
     pinMode(SENSOR_PIN,INPUT);
 }
 
+static void subTopic()
+{
+    mqtt.subscribe(dataTopic);
+    mqtt.subscribe(enaTopic);
+    mqtt.subscribe(stimeTopic);
+    mqtt.subscribe(hsocTopic);
+    mqtt.subscribe(hsonTopic);
+}
+
 void app::initClient()
 {
     smartConfig_Init();
     mqtt.setServer(mqtt_server, 1883);
     mqtt.setCallback(onDataMqtt);
+    subTopic();
 
-    mqtt.subscribe(TOPIC);
-    mqtt.subscribe(enaTopic);
-    mqtt.subscribe(stimeTopic);
 }
 
 void app::clientLoop()
@@ -59,14 +83,11 @@ void app::clientLoop()
 
     if(!mqtt.connected()){
         app::reConnect();
+        digitalWrite(LED_PIN, HIGH);
     }
-    // else{
-    //     if(millis() - logTime >= 5000)
-    //     {
-    //         logi("*******");
-    //         logTime = millis();
-    //     }
-    // }
+    else{
+        digitalWrite(LED_PIN, LOW);
+    }
 }
 
 void app::reConnect(void)
@@ -79,9 +100,7 @@ void app::reConnect(void)
 	if(mqtt.connect(clientID.c_str()))
 	{
 		logi("Mqtt connected !!!");
-		mqtt.subscribe(TOPIC);
-        mqtt.subscribe(enaTopic);
-        mqtt.subscribe(stimeTopic);
+        subTopic();
 
 		// mqtt.publish(TOPIC, "Hello");
 		mqtt.setCallback(onDataMqtt);
@@ -100,7 +119,19 @@ void app::readSensor()
     lowpulseoccupancy = lowpulseoccupancy + duration;
 }
 
+float arrConcen[10] = {0};
+int indexConcen = 0;
 
+static float calib(float* arrCon, int hsTB, int hscCalib)
+{
+    float conAvg = 0;
+    for(int i = 0; i < hsTB; i++)
+    {
+        conAvg += arrCon[i];
+    }
+
+    return (conAvg/10 + hscCalib);
+}
 
 void app::uploadData()
 {
@@ -109,21 +140,25 @@ void app::uploadData()
         // logi("sampletime_ms : %d", sampletime_ms);
         ratio = lowpulseoccupancy/(sampletime_ms*10.0);  // Integer percentage 0=>100
         concentration = 1.1*pow(ratio,3)-3.8*pow(ratio,2)+520*ratio+0.62; // using spec sheet curve
-        float conTemp = concentration;
-        concentration = (concentration/0.283)*heso;
-        String str = "P10 : " + String(concentration);
+        // float conTemp = concentration;
+        concentration = (concentration/0.283)*hesonhan;
+        arrConcen[indexConcen] = concentration;
+        indexConcen++;
+        if(indexConcen >= 10)
+        {
+            indexConcen = 0;
+        }
+
+        float conTemp = calib(arrConcen, 10, hesocong);
+        String str = ID_NODE + String(conTemp) + ";";
         // String str = NODE_SENSOR + String(lowpulseoccupancy) + " | " + String(ratio) + " | " + String(concentration) + ";";
         Serial.println(str);
-        // Serial.print(lowpulseoccupancy);
-        // Serial.print(",");
-        // Serial.print(ratio);
-        // Serial.print(",");
-        // Serial.println(concentration);
-        // mqtt.publish(TOPIC, str.c_str());
+        mqtt.publish(dataTopic, str.c_str());
         lowpulseoccupancy = 0;
         starttime = millis();
     }
 }
+
 
 // void app::setStartTime(unsigned long stime)
 // {
@@ -133,30 +168,45 @@ void app::uploadData()
 void onDataMqtt(char* topic, byte* payload, unsigned int length)
 {
 	// logi("payload : %s", payload);
-    if(strstr(topic, enaTopic) != NULL)
+    if((strstr((char*) payload, ID_NODE) != NULL) || (strstr((char*) payload, "*;") != NULL))
     {
-        if(strstr((char*)payload, "START"))
+        char* payloadTemp = ((char*) payload + 2);
+        logi("payloadTemp : %s", payloadTemp);
+
+        if(strstr(topic, enaTopic) != NULL)
         {
-            startFlag = 1;
+            if(strstr((char*)payloadTemp, "START"))
+            {
+                startFlag = 1;
+            }
+            if(strstr((char*)payloadTemp, "STOP"))
+            {
+                startFlag = 0;
+            }
+            
         }
-        if(strstr((char*)payload, "STOP"))
+
+        if(strstr(topic, hsonTopic) != NULL)
         {
-            startFlag = 0;
+            float hson = atof((char*)payloadTemp);
+            hesonhan = hson;
+            logi("hesonhan : %f", hesonhan);
         }
-        
+
+        if(strstr(topic, hsocTopic) != NULL)
+        {
+            int hsoc = atof((char*)payloadTemp);
+            hesocong = hsoc;
+            logi("hesocong : %d", hesocong);
+        }
+
+        if(strstr(topic, stimeTopic) != NULL)
+        {
+            unsigned long stTemp = atoi((char*)payloadTemp);
+            sampletime_ms = stTemp;
+            logi("sampletime_ms : %d", sampletime_ms);
+        }
+        // logi("startFlag : %d", startFlag);
     }
 
-    if(strstr(topic, hsoTopic) != NULL)
-    {
-        float hso = atof((char*)payload);
-        heso = hso;
-    }
-
-    if(strstr(topic, stimeTopic) != NULL)
-    {
-        unsigned long stTemp = atoi((char*)payload);
-        sampletime_ms = stTemp;
-        // logi("sampletime_ms : %d", sampletime_ms);
-    }
-    // logi("startFlag : %d", startFlag);
 }
