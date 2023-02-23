@@ -1,0 +1,15 @@
+
+Tụ tantalum 7343 106V 35V 10uF 7.3x4.3mm 	: 8
+Tụ dán 0805 470pF 0.47nF 50V			: 1
+Cầu đấu 2P KF301-2P 5.08mm			: 4
+Điện trở dán 0805 470R				: 1
+Điện trở dán 0805 10K				: 1
+AMS1117-3.3V IC ổn áp 3.3V 1A SOT-223		: 4
+Module WIFI ESP8266 ESP-07			: 3
+Jump cái đơn 2.0mm 1x40P chân thẳng		: 1
+Jump đực đơn 2.0mm 1x40P chân thẳng		: 1
+Cọc đồng M3 10mm cái-cái M3x10			: 10
+Cọc đồng M3 15mm cái-cái M3x15			: 30
+Vít sắt M3 5mm PM3+5				: 5
+Led 5mm đỏ					: 1
+Dây điện đôi 22AWG 0.76mm đen đỏ		: 5m

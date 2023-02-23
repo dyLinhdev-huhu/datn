@@ -1,0 +1,9 @@
+Module WIFI ESP8266 ESP-07			: 2
+Jump cái đơn 2.0mm 1x40P chân thẳng		: 2
+Jump đực đơn 2.0mm 1x40P chân thẳng		: 2
+Tụ tantalum 7343 106V 35V 10uF 7.3x4.3mm 	: 4
+AMS1117-3.3V IC ổn áp 3.3V 1A SOT-223		: 2
+Jack nguồn DC cái 5.5x2.1mm đấu dây dùng vít	: 5
+Cầu đấu 2P KF301-2P 5.08mm			: 5
+Header đực 5P XH2.54-5P chân cong		: 1
+Cáp 7 màu 20cm 40P cái-cái			: 1

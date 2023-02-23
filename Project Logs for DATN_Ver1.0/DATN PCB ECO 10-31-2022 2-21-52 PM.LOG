@@ -1,0 +1,26 @@
+Change Component Footprint: Designator=C1 Old Footprint=CAPC2012X127N New Footprint=CAP_7343
+Change Component Footprint: Designator=C2 Old Footprint=CAPC2012X127N New Footprint=CAP_7343
+Change Component Footprint: Designator=C3 Old Footprint=RESC1607X60N New Footprint=CAPC2012X127N
+Change Component Footprint: Designator=R1 Old Footprint=RESC1607X60N New Footprint=CAPC2012X127N
+Change Component Footprint: Designator=R2 Old Footprint=RESC1607X60N New Footprint=CAPC2012X127N
+Change Component Footprint: Designator=R3 Old Footprint=RESC1607X60N New Footprint=CAPC2012X127N
+Change Component Footprint: Designator=R4 Old Footprint=RESC1607X60N New Footprint=CAPC2012X127N
+Change Component Footprint: Designator=R5 Old Footprint=RESC1607X60N New Footprint=CAPC2012X127N
+Change Component Footprint: Designator=R6 Old Footprint=RESC1607X60N New Footprint=CAPC2012X127N
+Change Component Footprint: Designator=R7 Old Footprint=RESC1607X60N New Footprint=CAPC2012X127N
+Change Component Footprint: Designator=R8 Old Footprint=RESC1607X60N New Footprint=CAPC2012X127N
+Change Component Footprint: Designator=R9 Old Footprint=RESC1607X60N New Footprint=CAPC2012X127N
+Change Component Comment : Designator=C1 Old Comment=10uF Tantalium New Comment=CAP_TAN_SMD
+Change Component Comment : Designator=C2 Old Comment=10uF Tantalium New Comment=CAP_TAN_SMD
+Change component parameters: Designator = "C1"; Footprint = "CAP_7343"; UniqueID = "\DRHXAASJ"
+Change component parameters. Clean all parameters for all variants
+Change component parameters: Designator = "C2"; Footprint = "CAP_7343"; UniqueID = "\TBWZYITM"
+Change component parameters. Clean all parameters for all variants
+Added Component: Designator=HD1(HED2)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "Value"; Value = "Header 2"; VariantName = "[No Variations]"
+Added Pin To Net: NetName=GND Pin=HD1-1
+Added Pin To Net: NetName=+5V Pin=HD1-2
+Added Pin To Net: NetName=IO16 Pin=LED1-2
+Added Member To Class: ClassName=DATN Member=Component HD1 Header 2
+Added Room: Name=DATN

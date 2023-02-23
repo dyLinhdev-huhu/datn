@@ -1,0 +1,16 @@
+Thành 2mm
+Thành trong 1mm
+Cạnh cột 3mm x 6 cạnh
+Trụ bao cột 10x8mm
+Chiều rộng giữa 2 cột - 5.8mm
+Chiều dài giữa 2 cột - 4.5mm
+
+CHiều rộng hộp dưới 6.5mm
+chiều dài hộp dưới 4.7mm
+
+Chiều cao tổng 45mm
+
+
+Lỗ nguồn 5x10 
+
+1.7 + 1 + 1.7

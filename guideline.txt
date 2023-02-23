@@ -1,0 +1,5 @@
+I. Tổng quan lý thuyết về bụi và các pp đo.
+II. Wifi, giao thức MQTT, Node js, mongodb atlas.
+III. Thiết kế node cảm biến. 
+IV. Thiết kế hệ thống thu thập dữ liệu.
+V. Kết luận.

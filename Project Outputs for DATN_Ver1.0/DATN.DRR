@@ -1,0 +1,22 @@
+----------------------------------------------------------------------------------------------------------------------------------
+NCDrill File Report For: DATN.PcbDoc   11/3/2022  2:03:52 PM
+----------------------------------------------------------------------------------------------------------------------------------
+
+Layer Pair : Top Layer to Bottom Layer
+ASCII RoundHoles File : DATN.TXT
+
+Tool       Hole Size               Hole Tolerance               Hole Type       Hole Count   Plated         Tool Travel
+----------------------------------------------------------------------------------------------------------------------------------
+T1      12mil (0.305mm)                                           Round             83        PTH        0.00inch (0.00mm)
+T2      15mil (0.381mm)                                           Round             3         PTH        0.00inch (0.00mm)
+T3      28mil (0.711mm)                                           Round             17        PTH        0.00inch (0.00mm)
+T4      31mil (0.787mm)                                           Round             8         PTH        0.00inch (0.00mm)
+T5      32mil (0.813mm)                                           Round             2         PTH        0.00inch (0.00mm)
+T6      36mil (0.914mm)                                           Round             5         PTH        0.00inch (0.00mm)
+T7      43mil (1.1mm)                                             Round             6         PTH        0.00inch (0.00mm)
+T8      50mil (1.27mm)                                            Round             2         PTH        0.00inch (0.00mm)
+T9      118mil (3mm)                                              Round             5         PTH        0.00inch (0.00mm)
+----------------------------------------------------------------------------------------------------------------------------------
+Totals                                                                              131
+
+Total Processing Time (hh:mm:ss) : 00:00:00

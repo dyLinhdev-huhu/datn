@@ -1,0 +1,11 @@
+Change Component Footprint: Designator=C3 Old Footprint=CAPC2012X127N New Footprint=CAP_0805
+Change Component Footprint: Designator=R1 Old Footprint=CAPC2012X127N New Footprint=RES-SMD-0805
+Change Component Footprint: Designator=R2 Old Footprint=CAPC2012X127N New Footprint=RES-SMD-0805
+Change Component Footprint: Designator=R3 Old Footprint=CAPC2012X127N New Footprint=RES-SMD-0805
+Change Component Footprint: Designator=R4 Old Footprint=CAPC2012X127N New Footprint=RES-SMD-0805
+Change Component Footprint: Designator=R5 Old Footprint=CAPC2012X127N New Footprint=RES-SMD-0805
+Change Component Footprint: Designator=R6 Old Footprint=CAPC2012X127N New Footprint=RES-SMD-0805
+Change Component Footprint: Designator=R7 Old Footprint=CAPC2012X127N New Footprint=RES-SMD-0805
+Change Component Footprint: Designator=R8 Old Footprint=CAPC2012X127N New Footprint=RES-SMD-0805
+Change Component Footprint: Designator=R9 Old Footprint=CAPC2012X127N New Footprint=RES-SMD-0805
+Added Room: Name=DATN

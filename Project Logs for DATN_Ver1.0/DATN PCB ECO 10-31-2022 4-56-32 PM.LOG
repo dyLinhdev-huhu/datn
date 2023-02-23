@@ -1,0 +1,7 @@
+Removed Pin From Net: NetName=IO12 Pin=JP2-2
+Removed Pin From Net: NetName=IO13 Pin=JP2-4
+Change Component Designator: OldDesignator=ASM1117 NewDesignator=U
+Change Component Designator: OldDesignator=BME280 NewDesignator=U2
+Added Pin To Net: NetName=IO13 Pin=JP2-2
+Added Pin To Net: NetName=IO12 Pin=JP2-4
+Added Room: Name=DATN
