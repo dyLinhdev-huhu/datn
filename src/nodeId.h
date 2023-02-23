@@ -3,9 +3,13 @@
 #define NODE_3     "-node3"
 #define NODE_4     "-node4"
 #define NODE_5     "-node5"
+#define NODE_6     "-node6"
+#define NODE_7     "-node7"
 
 #define ID_1     "1;"
 #define ID_2     "2;"
 #define ID_3     "3;"
 #define ID_4     "4;"
 #define ID_5     "5;"
+#define ID_6     "6;"
+#define ID_7     "7;"

@@ -1,6 +1,7 @@
 #include "smartConfig.h"
 #include "log.h"
 #include "nodeId.h"
+#include "config_ID.h"
 
 ESP8266WebServer esp8Server(80);
 
@@ -13,7 +14,7 @@ String content;
 String _user_SSID = "";
 String _user_PASSWORD = "";
 
-#define NODE_NUM	NODE_1
+
 
 void smartConfig_Init()
 {

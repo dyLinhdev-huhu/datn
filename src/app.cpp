@@ -5,6 +5,7 @@
 #include "PubSubClient.h"
 #include <String>
 #include "nodeId.h"
+#include "config_ID.h"
 // using namespace std;
 
 //**************  TOPIC    ******************
@@ -17,7 +18,7 @@
 //**************  TOPIC    ******************
 
 //**************  ID NODE    ******************
-#define ID_NODE     ID_1
+
 
 //**************  ID NODE    ******************
 
@@ -30,11 +31,11 @@ int startFlag = 0;
 unsigned long logTime;
 
 #define HSN  0.002264
-#define HSC  18
+#define HSC  18.03
 
 //**************  VARIABLE    ******************
 float hesonhan = HSN;
-int hesocong = HSC;
+float hesocong = HSC;
 unsigned long sampletime_ms = 10000;
 
 //**************  VARIABLE    ******************
@@ -56,11 +57,17 @@ void app::initHardware()
     log_init();
     pinMode(LED_PIN, OUTPUT);
     pinMode(SENSOR_PIN,INPUT);
+    digitalWrite(LED_PIN, LOW);
+    digitalWrite(LED_PIN, HIGH);
+    digitalWrite(LED_PIN, LOW);
+    digitalWrite(LED_PIN, HIGH);
+    digitalWrite(LED_PIN, LOW);
+    digitalWrite(LED_PIN, HIGH);
 }
 
 static void subTopic()
 {
-    mqtt.subscribe(dataTopic);
+    // mqtt.subscribe(dataTopic);
     mqtt.subscribe(enaTopic);
     mqtt.subscribe(stimeTopic);
     mqtt.subscribe(hsocTopic);
@@ -122,7 +129,7 @@ void app::readSensor()
 float arrConcen[10] = {0};
 int indexConcen = 0;
 
-static float calib(float* arrCon, int hsTB, int hscCalib)
+static float calib(float* arrCon, int hsTB, float hscCalib)
 {
     float conAvg = 0;
     for(int i = 0; i < hsTB; i++)
@@ -195,7 +202,7 @@ void onDataMqtt(char* topic, byte* payload, unsigned int length)
 
         if(strstr(topic, hsocTopic) != NULL)
         {
-            int hsoc = atof((char*)payloadTemp);
+            float hsoc = atof((char*)payloadTemp);
             hesocong = hsoc;
             logi("hesocong : %d", hesocong);
         }
