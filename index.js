@@ -35,8 +35,8 @@ client.on('message', function (topic, message) {
   var str = message.toString();
   console.log(str)
   var res = str.split(";");
-  // console.log(res[0])
-  // console.log(res[1])
+  console.log(res[0])
+  console.log(res[1])
 
   const dustDt = new dustData({
     _id   : mongoose.Types.ObjectId(),

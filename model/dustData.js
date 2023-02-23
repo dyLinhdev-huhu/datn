@@ -3,10 +3,10 @@ const Schema = mongoose.Schema;
 const ObjectId = Schema.ObjectId;
 
 const dustDataSchema = new Schema({
-  _id   : ObjectId,
-  node  : Number,
-  value : String,
-  date  : { type: Date, default : () => Date.now() + 7*60*60*1000, index: true }
+  _id           : ObjectId,
+  node          : Number,
+  concentration : Number,
+  date          : { type: Date, default : () => Date.now() + 7*60*60*1000, index: true }
 });
 
 const dustData = mongoose.model('dustData', dustDataSchema)
