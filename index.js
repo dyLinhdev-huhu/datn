@@ -4,10 +4,13 @@ const dbConfig = config.get('dustData.dbConfig.dbName');
 const mqtt = require("mqtt")
 var client = mqtt.connect('mqtt://broker.hivemq.com')
 const fs = require('fs')
+const Schema = mongoose.Schema;
+const ObjectId = Schema.ObjectId;
 
 const topic = config.get('dustData.dbConfig.topic');
 
-const dustData = require('./model/dustData')  
+// const dustData = require('./model/dustData')  
+// const dustData1 = require('./model/dustData1')  
 
 mongoose.set('strictQuery', true);
 
@@ -31,6 +34,15 @@ client.on("connect", function(){
   console.log("Connect to broker successfully !")
 });
 
+
+const Data3DSchema = new Schema({
+  node          : Number,
+  concentration : Number,
+  date          : { type: Date, default : () => Date.now() + 7*60*60*1000, index: true }
+});
+
+const Data3D = mongoose.model('Data3D', Data3DSchema);
+
 client.on('message', function (topic, message) {
   // message is Buffer
   var str = message.toString();
@@ -39,8 +51,8 @@ client.on('message', function (topic, message) {
   // console.log(res[0])
   // console.log(res[1])
 
-  const dustDt = new dustData({
-    _id               : mongoose.Types.ObjectId(),
+  const dustDt = new Data3D({
+    // _id               : mongoose.Types.ObjectId(),
     node              : res[0],
     concentration     : res[1],
   }); 
@@ -49,7 +61,7 @@ client.on('message', function (topic, message) {
 
   str = message.toString() + "\n";
   console.log(message.toString())
-  fs.appendFile('log.txt', str, err => {
+  fs.appendFile('log1.txt', str, err => {
       if (err) {
         console.error(err);
       }
