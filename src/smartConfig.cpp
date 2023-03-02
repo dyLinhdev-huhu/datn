@@ -15,7 +15,6 @@ String _user_SSID = "";
 String _user_PASSWORD = "";
 
 
-
 void smartConfig_Init()
 {
 	WiFi.disconnect();
@@ -110,8 +109,6 @@ void setupAP(void)
 void getUserWifi(){
 
 	logi("Reading EEPROM ssid");
-
-
 	for (int i = 0; i < 32; ++i)
 	{
 		_user_SSID += char(EEPROM.read(i));

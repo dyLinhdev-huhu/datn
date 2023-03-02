@@ -14,6 +14,8 @@
 #define hsonTopic        "datn/dyLinh_dev/dustSensor/hesonhan"
 #define hsocTopic        "datn/dyLinh_dev/dustSensor/hesocong"
 #define stimeTopic      "datn/dyLinh_dev/dustSensor/stime"
+#define restartTopic      "datn/dyLinh_dev/dustSensor/restart"
+#define reMeasureTopic      "datn/dyLinh_dev/dustSensor/remeasure"
 
 //**************  TOPIC    ******************
 
@@ -72,6 +74,9 @@ static void subTopic()
     mqtt.subscribe(stimeTopic);
     mqtt.subscribe(hsocTopic);
     mqtt.subscribe(hsonTopic);
+    mqtt.subscribe(restartTopic);
+    mqtt.subscribe(reMeasureTopic);
+
 }
 
 void app::initClient()
@@ -214,6 +219,18 @@ void onDataMqtt(char* topic, byte* payload, unsigned int length)
             logi("sampletime_ms : %d", sampletime_ms);
         }
         // logi("startFlag : %d", startFlag);
-    }
+        if(strstr(topic, restartTopic) != NULL)
+        {
+            ESP.restart();
+        }
 
+        if(strstr(topic, reMeasureTopic) != NULL)
+        {
+            indexConcen = 0;
+            for(int i = 0; i < 10; i++)
+            {
+                arrConcen[i] = 0;
+            }
+        }
+    }
 }
