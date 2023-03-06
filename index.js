@@ -43,6 +43,14 @@ const Data3DSchema = new Schema({
 
 const Data3D = mongoose.model('Data3D', Data3DSchema);
 
+const DataOpenSchema = new Schema({
+  node          : Number,
+  concentration : Number,
+  date          : { type: Date, default : () => Date.now() + 7*60*60*1000, index: true }
+});
+
+const DataOpen = mongoose.model('DataOpenWide', DataOpenSchema);
+
 client.on('message', function (topic, message) {
   // message is Buffer
   var str = message.toString();
@@ -51,7 +59,7 @@ client.on('message', function (topic, message) {
   // console.log(res[0])
   // console.log(res[1])
 
-  const dustDt = new Data3D({
+  const dustDt = new DataOpen({
     // _id               : mongoose.Types.ObjectId(),
     node              : res[0],
     concentration     : res[1],
